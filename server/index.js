@@ -33,11 +33,17 @@ app.set('db', db);
 //Step 3 - Creating Users
 app.post('/sign-up', users.create);
 //Step 4 - Creating User Profiles
-app.put('/profile/:id', profiles.update);
+app.patch('/profile/:id', profiles.update);
 //Step 5 - Creating Posts
 app.post('/posts', posts.create);
 //Step 5 - Adding Comments To Posts
 app.post('/comments', posts.create);
+//Step 6 - Fetching our Profile
+app.get('/profile/email/:email', profiles.getByEmail);
+app.get('/profile/userid/:userid', profiles.getById);
+// Step 7 - Fetching all of our posts
+// Step 8 - Viewing a Post
+
 
 //Debug
 app.get('/debug', (req, res) => {
@@ -45,7 +51,6 @@ app.get('/debug', (req, res) => {
 })
 //Get Entities
 app.get('/all-users', users.read);
-app.get('/all-profiles', profiles.read);
 app.get('/all-posts', posts.read);
 app.get('/all-comments', comments.read);
 

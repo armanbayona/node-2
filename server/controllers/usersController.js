@@ -9,7 +9,7 @@ module.exports = {
 		const db = req.app.get('db')
 
 		db.users.data.push({ id, email, password })
-		db.profiles.data.push({  userID: id, thumbnail: "", about: "" })
+		db.profiles.data.push({ userId: id, thumbnail: "", about: "" })
 
 		db.users.id++
 		db.profiles.id++
