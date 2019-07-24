@@ -1,7 +1,30 @@
 module.exports = {
 
-	read: function(req, res) {
-		res.status(200).json(req.app.get('db').posts)
+	getAllPostByUser: function(req, res) {
+		const db = req.app.get('db')
+		const { userId } = req.params
+		
+		const post = db.posts.data.filter(x => x.userId == parseInt(userId))
+		
+		res.status(200).json(post)
+	},
+
+	getById: function(req, res) {
+		const db = req.app.get('db')
+		const { postId } = req.params
+
+		const post = db.posts.data.find(x => x.userId == parseInt(postId))
+		
+		res.status(200).json(post)
+	},
+
+	getWithComments: function(req, res) {
+		const db = req.app.get('db')
+		const { postId } = req.params
+		
+		const post = db.comments.data.filter(x => x.postId == parseInt(postId))
+		
+		res.status(200).json(post)
 	},
 
 	create: function(req, res) {

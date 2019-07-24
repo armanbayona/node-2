@@ -32,26 +32,33 @@ app.set('db', db);
 
 //Step 3 - Creating Users
 app.post('/sign-up', users.create);
+
 //Step 4 - Creating User Profiles
 app.patch('/profile/:id', profiles.update);
+
 //Step 5 - Creating Posts
 app.post('/posts', posts.create);
+
 //Step 5 - Adding Comments To Posts
-app.post('/comments', posts.create);
+app.post('/comments', comments.create);
+
 //Step 6 - Fetching our Profile
 app.get('/profile/email/:email', profiles.getByEmail);
 app.get('/profile/userid/:userid', profiles.getById);
-// Step 7 - Fetching all of our posts
-// Step 8 - Viewing a Post
 
+// Step 7 - Fetching all of our posts
+app.get('/user/:userId/posts', posts.getAllPostByUser);
+
+// Step 8 - Viewing a Post
+app.get('/posts/:postId', posts.getById);
+app.get('/posts/:postId/comments', posts.getWithComments);
 
 //Debug
 app.get('/debug', (req, res) => {
-	res.status(200).json(req.app.get('db'))
-})
+	res.status(200).json(req.app.get('db'));
+});
 //Get Entities
 app.get('/all-users', users.read);
-app.get('/all-posts', posts.read);
 app.get('/all-comments', comments.read);
 
 app.listen(PORT, () => {

@@ -8,9 +8,9 @@ module.exports = {
 		const { userId, postId, comment } = req.body;
 		const db = req.app.get('db')
 
-		db.users.data.push({ userId, postId, comment })
-		db.users.id++
+		db.comments.data.push({ userId, postId, comment })
+		db.comments.id++
 
-		res.status(201).json(db)
+		res.status(201).json(db.comments)
 	}
 };
